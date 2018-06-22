@@ -111,7 +111,6 @@
 <script>
 	import axios from 'axios'
 	import Vue from 'vue'
-	import qs from 'qs';
 	let echarts = require('echarts/lib/echarts')
 	require('echarts/lib/chart/pie')
 	export default {
@@ -161,15 +160,15 @@
 			},
 			PostInfo(){
 				let _this = this
-				this.$post('user/info',qs.stringify({userId:_this.userId}))
+				this.$post('user/info',{userId:_this.userId})
 			      .then((response) => {
-			        	_this.image1 = 'http://jzadmin.bellairehc.com/' + JSON.parse(response.data.data).image
-		               _this.info = JSON.parse(response.data.data)
-		               _this.bili = JSON.parse(response.data.data).bili
+			        	_this.image1 = 'http://jzadmin.bellairehc.com/' + JSON.parse(response.data).image
+		               _this.info = JSON.parse(response.data)
+		               _this.bili = JSON.parse(response.data).bili
 		               if(_this.bili == 100){
 		               	  document.querySelector(".myChart-text").style.marginLeft = "-0.55rem";
 		               }
-		               _this.bili1 =100 - JSON.parse(response.data.data).bili
+		               _this.bili1 =100 - JSON.parse(response.data).bili
 		               _this.drawLine();
 			      })
 			},

@@ -56,7 +56,6 @@
 <script>
 	import axios from 'axios'
 	import Vue from 'vue'
-	import qs from 'qs';
 	
 	export default {
 		
@@ -74,10 +73,10 @@
 			},
 			PostInfo(){
 					let _this = this
-					this.$post('user/info',qs.stringify({userId:_this.userId}))
+					this.$post('user/info',{userId:_this.userId})
 				      .then((response) => {
-				        	console.log(JSON.parse(response.data.data))
-							 _this.info = JSON.parse(response.data.data)
+				        	console.log(JSON.parse(response.data))
+							 _this.info = JSON.parse(response.data)
 //							  if( _this.info.ruxuetime != 0 ){  
 //		                        let date = new Date(_this.info.ruxuetime*1000);  
 //		                        let Y = date.getFullYear();  

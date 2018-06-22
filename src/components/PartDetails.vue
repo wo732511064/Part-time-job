@@ -67,10 +67,7 @@
 <script>
 import axios from 'axios'
 import Vue from 'vue'
-Vue.prototype.$http = axios
-import qs from 'qs';
 	export default {
-		
 		data() {　　　　　　
 			return {　
 				
@@ -86,7 +83,6 @@ import qs from 'qs';
 		        },
 		        loading:true,
 				part:false,　
-		        
 			}　　　　
 		},
 		
@@ -98,10 +94,9 @@ import qs from 'qs';
 				let _this = this
 				_this.jobid = _this.$route.query.jobid
 				let axiosDate = new Date()
-				this.$post('parttime/job-info',qs.stringify({jobid:this.jobid}))
+				this.$post('parttime/job-info',{jobid:this.jobid})
 			      .then((response) => {
-			        	_this.infos = JSON.parse(response.data.data);
-							console.log(_this.infos);
+			        	_this.infos = JSON.parse(response.data);
 							
 							let oDate = new Date()
 				 			let time = oDate.getTime() - axiosDate.getTime()

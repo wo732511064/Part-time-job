@@ -170,39 +170,12 @@
 				},
 				PostInfo(){
 					let _this = this
-					this.$post('user/info',qs.stringify({userId:_this.userId}))
+					this.$post('user/info',{userId:_this.userId})
 				      .then((response) => {
-				        	console.log(JSON.parse(response.data.data))
-							_this.image = 'http://jzadmin.bellairehc.com/' + JSON.parse(response.data.data).image
-			               _this.info = JSON.parse(response.data.data)
-//			               if( _this.info.ruxuetime != 0 ){  
-//		                        let date = new Date(_this.info.ruxuetime*1000);  
-//		                        let Y = date.getFullYear() + '年';  
-//		                        _this.info.ruxuetime = Y
-//		                    }
-//			               if( _this.info.jobtime != 0 ){  
-//		                        let date = new Date(_this.info.jobtime*1000);  
-//		                        let Y = date.getFullYear() + '年';  
-//		                        let  M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '月';  
-//		                        let D = date.getDate() + '日';  
-//		                        _this.info.jobtime = Y+M+D 
-//		                    }
-//			               if( _this.info.mytime != 0 ){  
-//		                        let date = new Date(_this.info.mytime*1000);  
-//		                        let Y = date.getFullYear() + '年';  
-//		                        let  M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '月';  
-//		                        let D = date.getDate() + '日';  
-//		                        _this.info.mytime = Y+M+D 
-//		                    }
-//			               if( _this.info.birthday != 0 ){  
-//		                        let date = new Date(_this.info.birthday*1000);  
-//		                        let Y = date.getFullYear();  
-//		                        _this.info.birthday = Y
-//		                    }
-			              })
-				  
-					
-					
+				        	console.log(JSON.parse(response.data))
+							_this.image = 'http://jzadmin.bellairehc.com/' + JSON.parse(response.data).image
+			               _this.info = JSON.parse(response.data)
+			             })
 				},
 		},
 		mounted() {

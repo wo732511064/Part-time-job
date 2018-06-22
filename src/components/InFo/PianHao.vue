@@ -95,7 +95,6 @@
 <script>
 	import axios from 'axios'
 	import Vue from 'vue'
-	import qs from 'qs';
 	import "@/assets/js/mobileSelect.min.js"
 	
 	export default {
@@ -163,8 +162,9 @@
 						 _this.info.mytime = 5
 					}
 					_this.info.jobtime = document.getElementById("gongzuo").innerHTML
-					this.$post('user/save-info',qs.stringify({userId:uid,qiuzhitype:_this.info.qiuzhitypeId,address:_this.info.address,mytime:_this.info.mytime,jobtime:_this.info.jobtime,expectjob:_this.info.expectjob}))
+					this.$post('user/save-info',{userId:uid,qiuzhitype:_this.info.qiuzhitypeId,address:_this.info.address,mytime:_this.info.mytime,jobtime:_this.info.jobtime,expectjob:_this.info.expectjob})
 				      .then((response) => {
+				      			console.log(response)
 				      			_this.tanchuang = true
 				      			console.log(_this.info.qiuzhitypeId)
 				      			setTimeout(function(){
@@ -176,17 +176,20 @@
 			},
 			PostInfo(){
 					let _this = this
-					this.$post('user/info',qs.stringify({userId:_this.userId}))
+					this.$post('user/info',{userId:_this.userId})
 				      .then((response) => {
-							 _this.info = JSON.parse(response.data.data)
+							 _this.info = JSON.parse(response.data)
 							 console.log(_this.info)
 						})
 				},
 			chusheng(){
 				let _this = this 
-			   this.$post('parttime/filter-type')
+			   this.$post('parttime/filter-type',
+			   		{
+			    		data:"null"
+			    	})
 			      .then((response) => {
-			        	let data1 = JSON.parse(response.data.data).jobList							
+			        	let data1 = JSON.parse(response.data).jobList							
 							let jslength=0;
 							 for(var js2 in data1){
 							 	jslength++;

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import qs from 'qs'
+import {Decrypt,Encrypt} from '@/assets/js/cryptojs'
 axios.defaults.timeout = 5000;
 axios.defaults.baseURL ='http://jz.bellairehc.com/index.php';
 
@@ -87,15 +88,13 @@ export function fetch(url,params={}){
  * @returns {Promise}
  */
 
- export function post(url,data={}){
- 	 console.log(data)
+ export function post(url,data1={}){
+ 	let jiamidata = qs.stringify({"data":Encrypt(JSON.stringify(data1))})
    return new Promise((resolve,reject) => {
-   	 console.log(data)
-     axios.post(url,data)
+     axios.post(url,jiamidata)
           .then(response => {
-          	console.log(data)
-            resolve(response);
-          },err => {
+          	 resolve(JSON.parse(Decrypt(response.data)));
+					 },err => {
             reject(err)
           })
    })

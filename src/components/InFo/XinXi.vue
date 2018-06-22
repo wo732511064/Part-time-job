@@ -82,7 +82,6 @@
 <script>
 	import axios from 'axios'
 	import Vue from 'vue'
-	import qs from 'qs';
 	export default {
 		
 		data() {　　　　　　
@@ -187,8 +186,9 @@
 					}
 					_this.info.birthday = document.getElementById("trigger1").innerHTML
 					console.log(_this.info.education)
-					this.$post('user/save-info',qs.stringify({userId:uid,image:_this.info.image,nickname:_this.info.nickname,birthday:_this.info.birthday,sex:_this.info.sex,education:_this.info.education}))
+					this.$post('user/save-info',{userId:uid,image:_this.info.image,nickname:_this.info.nickname,birthday:_this.info.birthday,sex:_this.info.sex,education:_this.info.education})
 				      .then((response) => {
+				      			console.log(response)
 				      			_this.tanchuang = true
 				      			setTimeout(function(){
 						                _this.$router.push('/Info')
@@ -199,11 +199,10 @@
 			},
 			PostInfo(){
 					let _this = this
-					this.$post('user/info',qs.stringify({userId:_this.userId}))
+					this.$post('user/info',{userId:_this.userId})
 				      .then((response) => {
-				        	console.log(JSON.parse(response.data.data))
-							 _this.info = JSON.parse(response.data.data)
-			               _this.image = 'http://jzadmin.bellairehc.com/' + JSON.parse(response.data.data).image
+							 _this.info = JSON.parse(response.data)
+			               _this.image = 'http://jzadmin.bellairehc.com/' + JSON.parse(response.data).image
 						})
 				    
 				},

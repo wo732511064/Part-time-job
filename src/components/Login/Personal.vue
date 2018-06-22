@@ -49,7 +49,6 @@
 <script>
 	import axios from 'axios'
 	import Vue from 'vue'
-	import qs from 'qs';
 	
 	export default {
 		data(){
@@ -83,28 +82,24 @@
 			            _this.showTishi = true
 			        }else{
 			            /*接口请求*/
-			           this.$post('site/login',qs.stringify({username:_this.username,password:_this.password}))
+			           this.$post('site/login',{username:_this.username,password:_this.password})
 					      .then((response) => {
-					        if(response.data.status == "erro"){
+					      	console.log(response)
+					        if(response.status == "erro"){
 				                  _this.tishi = "账号或密码错误"
 				                  _this.showTishi = true
 				              }
 				              else{
-				              	  _this.userId = JSON.parse(response.data.data).userId
+				              	  _this.userId = JSON.parse(response.data).userId
 				              	  console.log(_this.userId)
 				                  _this.$cookie.set('username',_this.username,1)
 				        	  	_this.$cookie.set('userId',_this.userId,1)
 				                  _this.loading = true
 				                  setTimeout(function(){
 				                      window.history.back()
-				                  }.bind(_this),1000)
-				                  
-				              }
-				              
+				                  }.bind(_this),1000)  
+				              }   
 					      })
-					    
-			           
-			            
 			        }
 			      }
 			    
